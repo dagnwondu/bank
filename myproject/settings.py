@@ -132,6 +132,7 @@ AUTH_USER_MODEL = 'authentication.CustomUser'
 LOGIN_REDIRECT_URL = '/portal/'
 # Where to send users who try to access protected pages without logging in
 LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/'
 
 #  Mock Configuration
 T24_API_URL = "http://localhost:8000/cbs/api"
