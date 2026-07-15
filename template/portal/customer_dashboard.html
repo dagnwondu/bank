@@ -1,6 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section class="mt-3">
+    <h3 class="text-lg font-bold mb-4">Quick Operations</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <a href="% url 'transfer' %}" class="p-4 bg-white rounded-lg shadow border hover:border-blue-500 transition">
+            <span class="block text-blue-600 font-bold">Transfer</span>
+            <span class="text-xs text-gray-500">Move funds</span>
+        </a>
+        <a href="% url 'bill_pay' %}" class="p-4 bg-white rounded-lg shadow border hover:border-blue-500 transition">
+            <span class="block text-blue-600 font-bold">Bill Pay</span>
+            <span class="text-xs text-gray-500">Pay utilities</span>
+        </a>
+        <a href="% url 'profile' %}" class="p-4 bg-white rounded-lg shadow border hover:border-blue-500 transition">
+            <span class="block text-blue-600 font-bold">Profile</span>
+            <span class="text-xs text-gray-500">Manage KYC</span>
+        </a>
+        <a href="% url 'support' %}" class="p-4 bg-white rounded-lg shadow border hover:border-blue-500 transition">
+            <span class="block text-blue-600 font-bold">Support</span>
+            <span class="text-xs text-gray-500">Open a ticket</span>
+        </a>
+    </div>
+</section>
 <h2 class="text-2xl font-bold mb-6">Your Accounts</h2>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
