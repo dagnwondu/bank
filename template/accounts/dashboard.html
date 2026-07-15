@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold">Welcome, {{ user.username }}</h2>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white p-6 rounded-xl shadow border">
+        <p class="text-sm text-gray-500">Current Balance</p>
+        <h3 class="text-3xl font-bold text-brand-blue">{{ balance }}</h3>
+    </div>
+</div>
+
+<div class="bg-white p-6 rounded-xl shadow border">
+    <h3 class="font-bold mb-4">Recent Transactions</h3>
+    <table class="w-full text-left" hx-get="/api/transactions/" hx-trigger="load" hx-swap="innerHTML">
+        <thead>
+            <tr class="text-gray-500 text-sm uppercase">
+                <th class="pb-3">Date</th>
+                <th class="pb-3">Description</th>
+                <th class="pb-3 text-right">Amount</th>
+            </tr>
+        </thead>
+        <tbody id="transaction-list">
+            <tr><td colspan="3" class="py-4 text-center">Loading...</td></tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

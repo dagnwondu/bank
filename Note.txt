@@ -1,0 +1,2 @@
+Use tailwind.config.js, configure banks brancd color etc
+Video lnk: https://www.youtube.com/watch?v=5sKp6oc03oU

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-6">Your Accounts</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for account in accounts %}
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 border-l-4 border-blue-600">
+        <h3 class="text-xs text-gray-500 uppercase tracking-widest font-semibold">
+            {{ account.account_type }}
+        </h3>
+        <p class="text-lg font-mono font-bold text-gray-800 mt-1">{{ account.account_number }}</p>
+        
+        <div class="mt-6">
+            <span class="text-gray-500 text-sm">Balance</span>
+            <p class="text-3xl font-bold text-blue-700">{{ account.currency }} {{ account.balance }}</p>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-gray-500">No active accounts found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
