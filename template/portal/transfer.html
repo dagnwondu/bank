@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">New Fund Transfer</h2>
+    
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        
+        <div>
+            <label class="block text-sm font-medium text-gray-700">From Account</label>
+            {{ form.source_account }}
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Beneficiary Account Number</label>
+            <input type="text" name="beneficiary" class="w-full mt-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter recipient account">
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Amount (USD)</label>
+            <input type="number" name="amount" class="w-full mt-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="0.00">
+        </div>
+
+        <button type="submit" class="w-full bg-blue-700 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition">
+            Confirm Transfer
+        </button>
+    </form>
+</div>
+{% endblock %}

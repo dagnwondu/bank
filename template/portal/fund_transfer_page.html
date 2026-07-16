@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Fund Transfer</h2>
+    
+    <!-- Selector Buttons -->
+    <div class="flex space-x-4 mb-8">
+        <button id="btnInternal" onclick="showSection('internal')" class="flex-1 py-2 bg-blue-700 text-white rounded-lg font-semibold transition">To Dashen Bank</button>
+        <button id="btnExternal" onclick="showSection('external')" class="flex-1 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold transition">To Other Banks</button>
+    </div>
+
+    <form method="post" id="transferForm">
+        {% csrf_token %}
+        <input type="hidden" name="transfer_type" id="transferType" value="internal">
+
+        <!-- Internal Section -->
+        <div id="internalSection">
+            {{ internal_form.as_p }}
+        </div>
+
+        <!-- External Section -->
+        <div id="externalSection" class="hidden">
+            {{ external_form.as_p }}
+        </div>
+
+        <button type="submit" class="w-full mt-6 bg-blue-700 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition">
+            Confirm Transfer
+        </button>
+    </form>
+</div>
+
+<script>
+    function showSection(type) {
+        // Update hidden field
+        document.getElementById('transferType').value = type;
+
+        // Toggle visibility
+        document.getElementById('internalSection').classList.toggle('hidden', type !== 'internal');
+        document.getElementById('externalSection').classList.toggle('hidden', type !== 'external');
+
+        // Update button styles
+        const btnInt = document.getElementById('btnInternal');
+        const btnExt = document.getElementById('btnExternal');
+        
+        btnInt.className = type === 'internal' ? 'flex-1 py-2 bg-blue-700 text-white rounded-lg font-semibold' : 'flex-1 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold';
+        btnExt.className = type === 'external' ? 'flex-1 py-2 bg-blue-700 text-white rounded-lg font-semibold' : 'flex-1 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold';
+    }
+</script>
+{% endblock %}
