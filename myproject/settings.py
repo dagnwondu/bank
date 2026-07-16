@@ -135,5 +135,5 @@ LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/'
 
 #  Mock Configuration
-T24_API_URL = "http://localhost:8000/cbs/api"
+T24_API_URL = "http://localhost:8000/cbs"
 T24_API_TOKEN = "mock-token-12345"

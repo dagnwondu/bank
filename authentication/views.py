@@ -102,23 +102,23 @@ def admin_dashboard(request):
 
     return render(request, 'dashboards/admin_dashboard.html', context)
 
-def dashboard(request):
-    role_map = {
-        'customer': 'customer_dashboard',
-        'finance': 'finance_dashboard',
-        'admin': 'admin_dashboard',
-        'accountant': 'accountant_dashboard',
-        'cashier': 'cashier_dashboard',
-    }
+# def dashboard(request):
+#     role_map = {
+#         'customer': 'customer_dashboard',
+#         'finance': 'finance_dashboard',
+#         'admin': 'admin_dashboard',
+#         'accountant': 'accountant_dashboard',
+#         'cashier': 'cashier_dashboard',
+#     }
     
-    # Get the role and redirect safely
-    target_view = role_map.get(request.user.user_type.lower())
+#     # Get the role and redirect safely
+#     target_view = role_map.get(request.user.user_type.lower())
     
-    if target_view:
-        return redirect(target_view)
+#     if target_view:
+#         return redirect(target_view)
         
-    messages.error(request, 'Unauthorized access.')
-    return redirect('login') # Assuming you have a 'login' URL name
+#     messages.error(request, 'Unauthorized access.')
+#     return redirect('login') # Assuming you have a 'login' URL name
 
 class MyUsersView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = CustomUser

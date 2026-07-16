@@ -2,14 +2,14 @@ from django.http import JsonResponse
 from .models import Account
 
 # cbs/views.py
-def mock_t24_api_account_balance(request, account_number): # 'account_number' parameter name is now actually 't24_customer_id'
-    # 1. Filter all accounts belonging to this customer ID
-    accounts = Account.objects.filter(customer__t24_customer_id=account_number)
+def mock_t24_api_account_balance(request, customer_id):
+    # Now the variable name matches the data being passed
+    # Filter directly by the customer_id field on your Account model
+    accounts = Account.objects.filter(t24_customer_id=customer_id)
     
     if not accounts.exists():
         return JsonResponse({"error": "No accounts found"}, status=404)
 
-    # 2. Serialize multiple accounts into a list
     data = [
         {
             "account_number": acc.account_number,

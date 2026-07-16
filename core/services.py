@@ -27,6 +27,14 @@ class T24MockEngine:
     
 
 
+import requests
+import logging
+from django.conf import settings
+from requests.exceptions import RequestException
+
+# Initialize logger for audit trails
+logger = logging.getLogger(__name__)
+
 class T24Client:
     def __init__(self):
         self.base_url = settings.T24_API_URL
@@ -35,13 +43,23 @@ class T24Client:
             "Content-Type": "application/json"
         }
 
-    # core/services.py
     def get_accounts(self, t24_customer_id):
-        url = f"{self.base_url}/accounts/{t24_customer_id}/"        
-        response = requests.get(url, headers=self.headers)
-        
-        if response.status_code == 200:
-            data = response.json()
-            return data # Ensure this is a LIST
-        
-        return None
+        url = f"{self.base_url}/api/accounts/{t24_customer_id}/"
+        try:
+            response = requests.get(url, headers=self.headers, timeout=5)
+            # ADD THIS:
+            if response.status_code != 200:
+                print(f"DEBUG: T24 API returned status {response.status_code}: {response.text}")
+            
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            print(f"DEBUG: Connection error: {e}")
+            return None
+        # Temporary hard-coded mock to verify your Portal dashboard display
+    # def get_accounts(self, t24_customer_id):
+    #     # Skip the actual API call
+    #     return [
+    #         {"id": "10121284-001", "balance": 5000.00, "account_type": "Savings"},
+    #         {"id": "10121284-002", "balance": 150.00, "account_type": "Current"}
+    #     ]

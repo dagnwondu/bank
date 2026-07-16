@@ -37,7 +37,7 @@ class Account(models.Model):
     status = models.CharField(max_length=20, default='active')
 
     def __str__(self):
-        return f"{self.account_number} - {self.customer}"
+        return f"{self.account_number}"
 
 
 
