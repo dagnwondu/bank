@@ -2,6 +2,7 @@
 from django import forms
 from cbs.models import Account
 
+
 class TransferForm(forms.Form):
 # portal/forms.py
 
@@ -50,10 +51,6 @@ class TransferForm(forms.Form):
         return cleaned_data
 
 
-
-# portal/forms.py
-from django import forms
-from cbs.models import Account
 
 class ExternalTransferForm(forms.Form):
     # Standard Fields

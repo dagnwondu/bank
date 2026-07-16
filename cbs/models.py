@@ -47,6 +47,8 @@ class Transaction(models.Model):
     transaction_type = models.CharField(max_length=10, choices=[('CR', 'Credit'), ('DR', 'Debit')])
     reference = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
+    contra_account = models.CharField(max_length=50)
+    description = models.TextField()
 
     class Meta:
         ordering = ['-created_at']

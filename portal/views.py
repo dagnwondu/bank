@@ -3,15 +3,13 @@ from django.contrib import messages
 from authentication.views import role_required
 from core.services import T24Client, Account
 from .forms import TransferForm, ExternalTransferForm
+from cbs.models import Transaction
  
 
 @role_required(['customer'])
 def customer_dashboard(request):
     client = T24Client()
     raw_accounts = client.get_accounts(request.user.t24_customer_id)
-    
-
-
     context = {
         "user": request.user,
         "accounts": raw_accounts,
@@ -54,4 +52,14 @@ def fund_transfer_page(request):
     return render(request, 'portal/fund_transfer_page.html', {
         'internal_form': internal_form,
         'external_form': external_form
+    })
+
+
+def transaction_list_partial(request):
+    transactions = Transaction.objects.filter(
+        account__t24_customer_id=request.user.t24_customer_id
+    ).order_by('-created_at')[:5]
+    
+    return render(request, 'portal/partials/transaction_rows.html', {
+        'transactions': transactions
     })
